@@ -11,7 +11,7 @@
     "@testing-library/user-event": "^7.1.2",
     "connected-react-router": "^6.8.0",
     "firebase": "^7.24.0",
-    "history": "^5.0.0",
+    "history": "^4.10.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-redux": "^7.2.1",
