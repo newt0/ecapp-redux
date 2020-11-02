@@ -4,7 +4,7 @@ const initialState = {
     isSignedIn: false,
     uid: "",
     username: "",
-    icon: "",
+    role: " ",
   },
 };
 
