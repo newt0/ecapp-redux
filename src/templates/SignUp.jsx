@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { TextInput } from "../components/UIkit";
 import PrimaryButton from "../components/UIkit/PrimaryButton";
 import { signUp } from "../reducks/users/operations";
+import { push } from "connected-react-router";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -92,6 +93,10 @@ const SignUp = () => {
             dispatch(signUp(username, email, password, confirmPassword))
           }
         />
+        <div className="module-spacer--medium" />
+        <p onClick={() => dispatch(push("/signin"))}>
+          If you have your account, sign in here
+        </p>
       </div>
     </div>
   );
