@@ -3,7 +3,7 @@ import { push } from "connected-react-router";
 
 const productsRef = db.collection("products");
 
-export const saveProduct = (name, description, gender, category, price) => {
+export const saveProduct = (name, description, gender, category, price, images) => {
   return async (dispatch) => {
     const timestamp = FirebaseTimestamp.now();
     const data = {
@@ -13,6 +13,7 @@ export const saveProduct = (name, description, gender, category, price) => {
       name: name,
       price: parseInt(price, 10),
       updated_at: timestamp,
+      images: images
     };
 
     const ref = productsRef.doc();
