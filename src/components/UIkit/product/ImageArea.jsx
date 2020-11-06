@@ -2,7 +2,6 @@ import { IconButton } from "@material-ui/core";
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 import { makeStyles } from "@material-ui/styles";
 import React, { useCallback } from "react";
-// import { useDispatch } from "react-redux";
 import { storage } from "../../../firebase";
 import ImagePreview from "./ImagePreview";
 
@@ -18,7 +17,7 @@ const ImageArea = (props) => {
 
   const deleteImage = useCallback(
     async (id) => {
-      const ret = window.confirm("Do you Delete this picture?");
+      const ret = window.confirm("Delete this image?");
       if (!ret) {
         return false;
       } else {
@@ -29,10 +28,11 @@ const ImageArea = (props) => {
     },
     [props]
   );
+
   const uploadImage = useCallback(
     (event) => {
       const file = event.target.files;
-      let blob = new Blob(file, { type: "images/jpeg" });
+      let blob = new Blob(file, { type: "image/jpeg" });
 
       const S =
         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -60,9 +60,10 @@ const ImageArea = (props) => {
         {props.images.length > 0 &&
           props.images.map((image) => (
             <ImagePreview
+              delete={deleteImage}
+              id={image.id}
               path={image.path}
               key={image.id}
-              delete={deleteImage}
             />
           ))}
       </div>

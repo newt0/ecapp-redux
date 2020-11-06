@@ -7,7 +7,6 @@ import TextInput from "../components/UIkit/TextInput";
 import { saveProduct } from "../reducks/products/operations";
 
 const ProductEdit = () => {
-  
   const dispatch = useDispatch();
   const [name, setName] = useState(""),
     [description, setDescription] = useState(""),
@@ -55,7 +54,7 @@ const ProductEdit = () => {
         Register and Edit the products
       </h2>
       <div className="c-section-container">
-        <ImageArea images={images} setImages={setImages}/>
+        <ImageArea images={images} setImages={setImages} />
         <TextInput
           fullWidth={true}
           label={"Product Name"}
@@ -108,7 +107,9 @@ const ProductEdit = () => {
         <PrimaryButton
           label={"Register the info about the products"}
           onClick={() =>
-            dispatch(saveProduct(name, description, gender, category, price, images))
+            dispatch(
+              saveProduct(name, description, gender, category, price, images)
+            )
           }
         />
       </div>
