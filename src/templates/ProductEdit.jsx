@@ -1,19 +1,29 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import PrimaryButton from "../components/UIkit/PrimaryButton";
-import ImageArea from "../components/UIkit/product/ImageArea";
+import SetSizesArea from "../components/Products/SetSizesArea";
+import ImageArea from "../components/Products/ImageArea";
 import SelectBox from "../components/UIkit/SelectBox";
 import TextInput from "../components/UIkit/TextInput";
+import { db } from "../firebase";
 import { saveProduct } from "../reducks/products/operations";
 
 const ProductEdit = () => {
   const dispatch = useDispatch();
+  let id = window.location.pathname.split("/product/edit")[1];
+  // console.log("Before split / >>>", id);
+  if (id !== "") {
+    id = id.split("/")[1];
+    // console.log("After split / >>>", id)
+  }
+
   const [name, setName] = useState(""),
     [description, setDescription] = useState(""),
     [category, setCategory] = useState(""),
     [gender, setGender] = useState(""),
     [price, setPrice] = useState(""),
-    [images, setImages] = useState([]);
+    [images, setImages] = useState([]),
+    [sizes, setSizes] = useState([]);
 
   const inputName = useCallback(
     (event) => {
@@ -47,6 +57,24 @@ const ProductEdit = () => {
     { id: "male", name: "MALE" },
     { id: "female", name: "FEMALE" },
   ];
+
+  useEffect(() => {
+    if (id !== "") {
+      db.collection("products")
+        .doc(id)
+        .get()
+        .then((snapshot) => {
+          const data = snapshot.data();
+          setImages(data.images);
+          setName(data.name);
+          setDescription(data.description);
+          setCategory(data.categories);
+          setGender(data.gender);
+          setPrice(data.price);
+          setSizes(data.sizes)
+        });
+    }
+  }, [id]);
 
   return (
     <section>
@@ -102,13 +130,24 @@ const ProductEdit = () => {
           // onChange={}
         />
       </div>
-      <div className="module-spacer--medium" />
+      <div className="module-spacer--small" />
+      <SetSizesArea sizes={sizes} setSizes={setSizes}/>
+      <div className="module-spacer--small" />
       <div className="center">
         <PrimaryButton
           label={"Register the info about the products"}
           onClick={() =>
             dispatch(
-              saveProduct(name, description, gender, category, price, images)
+              saveProduct(
+                id,
+                name,
+                description,
+                gender,
+                category,
+                price,
+                images,
+                sizes
+              )
             )
           }
         />
