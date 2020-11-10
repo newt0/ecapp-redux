@@ -1,13 +1,8 @@
 import { createSelector } from "reselect";
 
-const usersSelector = (state) => state.users;
+const ProductsSelector = (state) => state.products;
 
-export const getIsSignedIn = createSelector(
-  [usersSelector],
-  (state) => state.isSignedIn
-);
-export const getUserId = createSelector([usersSelector], (state) => state.uid);
-export const getUsername = createSelector(
-  [usersSelector],
-  (state) => state.username
+export const getProducts = createSelector(
+  [ProductsSelector],
+  (state) => state.list
 );
