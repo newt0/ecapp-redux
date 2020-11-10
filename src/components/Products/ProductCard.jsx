@@ -15,14 +15,14 @@ import { deleteProduct } from "../../reducks/products/operations";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // [theme.breakpoints.down("sm")]: {
-    //   margin: 8,
-    //   width: "calc(50% - 16px)",
-    // },
-    // [theme.breakpoints.up("md")]: {
-    //   margin: 16,
-    //   width: "calc(33.3333% - 32px)",
-    // },
+    [theme.breakpoints.down("sm")]: {
+      margin: 8,
+      width: "calc(50% - 16px)",
+    },
+    [theme.breakpoints.up("md")]: {
+      margin: 16,
+      width: "calc(33.3333% - 32px)",
+    },
   },
   content: {
     display: "flex",
@@ -63,51 +63,49 @@ const ProductCard = (props) => {
   const price = props.price.toLocaleString();
 
   return (
-    <div>
-      <Card className={classes.root}>
-        <CardMedia
-          className={classes.media}
-          image={images[0].path}
-          onClick={() => dispatch(push("/product/" + props.id))}
-        />
-        <CardContent className={classes.content}>
-          <div onClick={() => dispatch(push("/product" + props.id))}>
-            <Typography color="textSecondary" component="p">
-              {props.name}
-            </Typography>
-            <Typography className={classes.price} component="p">
-              ¥{price}
-            </Typography>
-          </div>
-          <IconButton onClick={handleClick}>
-            <MoreVertIcon />
-          </IconButton>
-          <Menu
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
+    <Card className={classes.root}>
+      <CardMedia
+        className={classes.media}
+        image={images[0].path}
+        onClick={() => dispatch(push("/product/" + props.id))}
+      />
+      <CardContent className={classes.content}>
+        <div onClick={() => dispatch(push("/product" + props.id))}>
+          <Typography color="textSecondary" component="p">
+            {props.name}
+          </Typography>
+          <Typography className={classes.price} component="p">
+            ¥{price}
+          </Typography>
+        </div>
+        <IconButton onClick={handleClick}>
+          <MoreVertIcon />
+        </IconButton>
+        <Menu
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem
+            onClick={() => {
+              dispatch(push("/product/edit/" + props.id));
+              handleClose();
+            }}
           >
-            <MenuItem
-              onClick={() => {
-                dispatch(push("/product/edit/" + props.id));
-                handleClose();
-              }}
-            >
-              Edit
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                dispatch(deleteProduct(props.id));
-                handleClose();
-              }}
-            >
-              Delete
-            </MenuItem>
-          </Menu>
-        </CardContent>
-      </Card>
-    </div>
+            Edit
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              dispatch(deleteProduct(props.id));
+              handleClose();
+            }}
+          >
+            Delete
+          </MenuItem>
+        </Menu>
+      </CardContent>
+    </Card>
   );
 };
 
