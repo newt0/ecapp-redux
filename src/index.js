@@ -4,6 +4,8 @@ import App from "./App.jsx";
 import { Provider } from "react-redux";
 import { createStore } from "./reducks/store/store";
 import { ConnectedRouter } from "connected-react-router";
+import {MuiThemeProvider} from '@material-ui/core/styles';
+import { theme } from "./assets/theme";
 import * as History from "history";
 import * as serviceWorker from "./serviceWorker";
 
@@ -13,7 +15,9 @@ export const store = createStore(history);
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App />
+      <MuiThemeProvider theme={theme}>
+        <App />
+      </MuiThemeProvider>
     </ConnectedRouter>
   </Provider>,
   document.getElementById("root")
