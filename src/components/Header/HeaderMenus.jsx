@@ -6,7 +6,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import MenuIcon from "@material-ui/icons/Menu";
 import { push } from "connected-react-router";
 
-const HeaderMenus = () => {
+const HeaderMenus = (props) => {
   return (
     <div>
       <IconButton>
@@ -17,7 +17,7 @@ const HeaderMenus = () => {
       <IconButton>
         <FavoriteBorderIcon />
       </IconButton>
-      <IconButton>
+      <IconButton onClick={(event) => props.handleDrawerToggle(event)}>
         <MenuIcon />
       </IconButton>
     </div>
