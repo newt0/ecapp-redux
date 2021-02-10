@@ -27,3 +27,4 @@ yarn-error.log*
 # Firebase files
 firestore.rules
 src/firebase/config.jsx
+src/firebase/config.js
