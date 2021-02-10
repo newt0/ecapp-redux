@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
+.idea
+package-lock.json
 
 # testing
 /coverage
@@ -24,4 +26,4 @@ yarn-error.log*
 
 # Firebase files
 firestore.rules
-src/firebase/config.js
+src/firebase/config.jsx
